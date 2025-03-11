@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const API_BASE_URL = process.env.API_BASE_URL; // Usa la variabile di ambiente
 
 app.use(cors());
 
@@ -21,7 +22,7 @@ app.get("/proxy", async (req, res) => {
   }
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(`${API_BASE_URL}${url}`); // Usa API_BASE_URL
     if (!response.ok) {
       throw new Error(`Errore nel download: ${response.statusText}`);
     }
